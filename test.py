@@ -21,24 +21,24 @@ champions_list = [
     ("Karthus", "Mage", "Magic damage"),
     ("Graves", "AD", "Physical damage")
 ]
-for index, champion in enumerate(champions_list, start=1):
-    print(f"{index}. {champion[0]}")
+for index, champion in enumerate(champions_list, start=1): #Use the enumerate function to numbered all the champion that exist in the list
+    print(f"{index}. {champion[0]}")                       #This help people to easily see the champion pool
 #Start the banning phase
-valid_champion_names = [champ[0] for champ in champions_list]
-while True:
+valid_champion_names = [champ[0] for champ in champions_list] #Take all the champion name in the first place in tupple
+while True: #Use the loop to make the user have to rechoose the champion again
     champion = input("Banned 3 champion that exist in the list : ")
-    champion_banned = champion.split()
+    champion_banned = champion.split() #change from a string to a list
     if "," in champion:
-        print("Please remove the comma")
+        print("Please remove the comma") #i need to get rid of the comma to make my code work
         continue 
-    if all(name in valid_champion_names for name in champion_banned):
+    if all(name in valid_champion_names for name in champion_banned): #Use the all function to check if the champion banned exist in the champion pool
         print("Champion banned : ", champion_banned)
         break 
     else:
-        print("Please choose the champion that already exist in the list")
+        print("Please choose the champion that already exist in the list") #If the champion isn't there, then you have to choose the champion again
 
 #Start the choosing phase
-print("Start choose your champion(Choose beetwen 20 champs that's already exist in the pool)")
+print("============Start choose your champion(Choose beetwen 20 champs that's already exist in the pool)===================")
 while True:
     champion_choosing1 = input("Write down your draft (Write at least 5 champs):" )
     champion_choosing2 = champion_choosing1.split()
@@ -54,7 +54,7 @@ while True:
         print("Please choose again, your champion doesn't exist in the champion pool")
 #Analysis the draft
 print("===== Draft Analysis =====")
-physical_count = 0
+physical_count = 0  #Call all the type of damage and role
 magic_count = 0
 role_count = {}
 for champ_name in champion_choosing2:
@@ -64,8 +64,8 @@ for champ_name in champion_choosing2:
             damage = champ[2]
             # Count damage type
             if "Physical" in damage or "physical" in damage:
-                physical_count += 1 # plus 1 for each physical damage 
-            elif "Magic" in damage or "magic" in damage:
+                physical_count += 1 # plus 1 for each physical damage  #For each time one ad damage exist, plus one
+            elif "Magic" in damage or "magic" in damage: #Same as the physical damage
                 magic_count += 1
             # Count roles
             if role in role_count:
@@ -74,12 +74,11 @@ for champ_name in champion_choosing2:
                 role_count[role] = 1
 
 print("Physical champions:", physical_count)
-print("Magic champions:", magic_count)
-
+print("Magic champions:", magic_count) #Print all of the type of damage that exist in the draft
 print("\nRoles in your draft:")
 for role, amount in role_count.items():
     print(f"{role}: {amount}")
-#Start
+#Giving advice
 print("======Counting Damage Type Of the Team======")
 if physical_count >= 4:
     print("Too much Physical Damage, the enemy can easily counter this by buying armor resistance")
